@@ -13,21 +13,6 @@ from sklearn.metrics import mean_squared_error as mse
 import matplotlib.pyplot as plt
 
 
-def my_nn(input_dim):
-    model = Sequential()
-
-    model.add(Dense(4, input_dim=input_dim))
-
-    # model.add(Dropout(0.1))
-
-    model.add(Dense(3))
-    # model.add(Dropout(0.1))
-    model.add(Dense(1))
-    model.add(Activation('relu'))
-
-    model.compile(optimizer='adam', loss='mse', metrics=['accuracy'])
-
-    return model
 
 
 if __name__ == '__main__':
@@ -63,7 +48,7 @@ if __name__ == '__main__':
     X = df_t.values
 
     kf = KFold(n_splits=10)
-    # model = my_nn(df_t.shape[1])
+
     # model = LinearRegression()
     model = SGDRegressor()
     i = 1
@@ -73,11 +58,7 @@ if __name__ == '__main__':
         X_train, X_test = X[train_index], X[test_index]
         y_train, y_test = y[train_index], y[test_index]
 
-        # reduce_lr = ReduceLROnPlateau(monitor='val_loss', factor=0.9, patience=5, min_lr=0.000001, verbose=1)
-        # checkpointer = ModelCheckpoint(filepath="test.hdf5", verbose=1, save_best_only=True)
-        # history = model.fit(x=X_train, y=y_train, epochs=12, validation_data=(X_test, y_test),
-        #                     callbacks=[reduce_lr, checkpointer],verbose=0)
-        # history_plot(history)
+
         model.fit(X_train, y_train)
         predicted = model.predict(X_test)
         mse_ = mse(y_test, predicted)
