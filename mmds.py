@@ -72,7 +72,7 @@ if __name__ == '__main__':
     for train_index, test_index in kf.split(df_t):
         X_train, X_test = X[train_index], X[test_index]
         y_train, y_test = y[train_index], y[test_index]
-        # были попытки обучить сеть, только для такого количества данных нет особого смысла, как мне кажется
+
         # reduce_lr = ReduceLROnPlateau(monitor='val_loss', factor=0.9, patience=5, min_lr=0.000001, verbose=1)
         # checkpointer = ModelCheckpoint(filepath="test.hdf5", verbose=1, save_best_only=True)
         # history = model.fit(x=X_train, y=y_train, epochs=12, validation_data=(X_test, y_test),
